@@ -22,4 +22,22 @@ Student.create = (newStudent, result) => {
   });
 };
 
+Student.select = (oldStudent, result) => {
+  sql.query(
+    "SELECT COUNT(*) AS duplicatedEmailCount FROM tb_student WHERE `studentEmail` = ?",
+    oldStudent.studentEmail,
+    (err, res) => {
+      if (err) {
+        console.error("error: " + err);
+        result(err, null);
+        return;
+      }
+      console.log("select duplicatedEmailCount: ", {
+        duplicatedEmailCount: res[0].duplicatedEmailCount,
+      });
+      result(null, { res });
+    }
+  );
+};
+
 module.exports = Student;

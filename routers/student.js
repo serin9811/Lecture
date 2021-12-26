@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post("/new", students.create);
 
+router.post("/", students.select);
+
 module.exports = router;
