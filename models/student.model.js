@@ -8,14 +8,19 @@ const Student = function (student) {
 
 Student.create = async (newStudent) => {
   try {
-    const count = await Student.selectCount(newStudent.studentEmail);
+    const count = await Student.selectDuplicatedEmailCount(
+      newStudent.studentEmail
+    );
     const { duplicatedEmailCount } = count[0];
 
     if (duplicatedEmailCount > 0) {
       return [];
     }
-    const value = await pQuery("INSERT INTO tb_student SET ?", newStudent);
-    const result = await Student.selectByIdx(value.insertId);
+    const insertResult = await pQuery(
+      "INSERT INTO tb_student SET ?",
+      newStudent
+    );
+    const result = await Student.selectByIdx(insertResult.insertId);
     return result;
   } catch (err) {
     throw err;
@@ -25,7 +30,7 @@ Student.create = async (newStudent) => {
 Student.selectByEmail = (studentEmail) =>
   pQuery("SELECT * FROM tb_student WHERE `studentEmail` = ?", studentEmail);
 
-Student.selectCount = (studentEmail) =>
+Student.selectDuplicatedEmailCount = (studentEmail) =>
   pQuery(
     "SELECT COUNT(*) AS duplicatedEmailCount FROM tb_student WHERE `studentEmail` = ?",
     studentEmail

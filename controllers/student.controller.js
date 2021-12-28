@@ -15,33 +15,18 @@ exports.create = async (req, res) => {
     return;
   }
 
-  // Save student in database
   try {
-    const val = await Student.create(student);
+    // Save student in database
+    const createResult = await Student.create(student);
 
-    if (!val.length) {
+    if (!createResult.length) {
       res.status(400).json({ message: "Already Exist" });
       return;
     }
-    res.json(val[0]);
+    res.json(createResult[0]);
   } catch (err) {
     res.status(500).json({ message: err });
   }
-};
-
-exports.select = (req, res) => {
-  if (!req.param) {
-    res.status(400).send({
-      message: "Parameter cannot be empty",
-    });
-    return;
-  }
-
-  // Select count of students in database
-  Student.select(req.params.studentEmail, (err, data) => {
-    if (err) res.status(500).send({ message: err.message });
-    else return res.send(data);
-  });
 };
 
 exports.delete = async (req, res) => {
@@ -52,14 +37,14 @@ exports.delete = async (req, res) => {
     return;
   }
 
-  // Delete student in database
   try {
-    const val = await Student.delete(req.params.studentIdx);
-    if (!val.length) {
+    // Delete student in database
+    const deleteResult = await Student.delete(req.params.studentIdx);
+    if (!deleteResult.length) {
       res.status(404).json({ message: "Not exist" });
       return;
     }
-    res.json(val[0]);
+    res.json(deleteResult[0]);
   } catch (err) {
     res.status(500).json({ message: err });
   }

@@ -1,6 +1,6 @@
 const Lecture = require("../models/lecture.model.js");
 
-exports.select = (req, res) => {
+exports.select = async (req, res) => {
   if (!req.param) {
     res.status(400).send({
       message: "Parameter cannot be empty",
@@ -8,11 +8,18 @@ exports.select = (req, res) => {
     return;
   }
 
-  // Select lecture in database
-  Lecture.select(req.params.lectureIdx, (err, data) => {
-    if (err) res.status(500).send({ message: err.message });
-    else return res.send(data);
-  });
+  try {
+    // Select lecture in database
+    const selectResult = await Lecture.select(req.params.lectureIdx);
+    console.log("selectResult: " + JSON.stringify(selectResult));
+
+    if (!selectResult.length) {
+      res.status(404).json({ message: "No such lecture" });
+    }
+    res.json(selectResult[0]);
+  } catch (err) {
+    res.status(500).json({ message: "" });
+  }
 };
 
 exports.update = (req, res) => {
