@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+const { pQuery } = require("../utils");
 
 const Student = function (student) {
   this.studentName = student.studentName;
@@ -6,38 +6,42 @@ const Student = function (student) {
   this.studentUserName = student.studentUserName;
 };
 
-Student.create = (newStudent, result) => {
-  sql.query("INSERT INTO tb_student SET ?", newStudent, (err, res) => {
-    if (err) {
-      console.error("error: " + err);
-      result(err, null);
-      return;
-    }
+Student.create = async (newStudent) => {
+  try {
+    const count = await Student.selectCount(newStudent.studentEmail);
+    const { duplicatedEmailCount } = count[0];
 
-    console.log("create stuent: ", {
-      id: res.insertId,
-      ...newStudent,
-    });
-    result(null, { id: res.insertId, ...newStudent });
-  });
+    if (duplicatedEmailCount > 0) {
+      return [];
+    }
+    const value = await pQuery("INSERT INTO tb_student SET ?", newStudent);
+    const result = await Student.selectByIdx(value.insertId);
+    return result;
+  } catch (err) {
+    throw err;
+  }
 };
 
-Student.select = (oldStudent, result) => {
-  sql.query(
+Student.selectByEmail = (studentEmail) =>
+  pQuery("SELECT * FROM tb_student WHERE `studentEmail` = ?", studentEmail);
+
+Student.selectCount = (studentEmail) =>
+  pQuery(
     "SELECT COUNT(*) AS duplicatedEmailCount FROM tb_student WHERE `studentEmail` = ?",
-    oldStudent.studentEmail,
-    (err, res) => {
-      if (err) {
-        console.error("error: " + err);
-        result(err, null);
-        return;
-      }
-      console.log("select duplicatedEmailCount: ", {
-        duplicatedEmailCount: res[0].duplicatedEmailCount,
-      });
-      result(null, { res });
-    }
+    studentEmail
   );
+
+Student.selectByIdx = (studentIdx) =>
+  pQuery("SELECT * FROM tb_student WHERE `studentIdx` = ?", studentIdx);
+
+Student.delete = async (studentIdx) => {
+  try {
+    const deletedStudent = await Student.selectByIdx(studentIdx);
+    await pQuery("DELETE FROM tb_student WHERE `studentIdx` = ?", studentIdx);
+    return deletedStudent;
+  } catch (err) {
+    throw err;
+  }
 };
 
 module.exports = Student;

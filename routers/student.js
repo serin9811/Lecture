@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.post("/new", students.create);
 
-router.post("/", students.select);
+router.get("/:studentEmail", students.select);
+
+router.delete("/:studentIdx", students.delete);
 
 module.exports = router;
