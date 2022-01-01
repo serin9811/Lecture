@@ -1,6 +1,6 @@
 const Lecture = require("../models/lecture.model.js");
 
-exports.select = async (req, res) => {
+exports.selectOne = async (req, res) => {
   if (!req.param) {
     res.status(400).send({
       message: "Parameter cannot be empty",
@@ -10,15 +10,14 @@ exports.select = async (req, res) => {
 
   try {
     // Select lecture in database
-    const selectResult = await Lecture.select(req.params.lectureIdx);
-    console.log("selectResult: " + JSON.stringify(selectResult));
+    const selectResult = await Lecture.selectIdx(req.params.lectureIdx);
 
     if (!selectResult.length) {
       res.status(404).json({ message: "No such lecture" });
     }
     res.json(selectResult[0]);
   } catch (err) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -39,4 +38,48 @@ exports.update = (req, res) => {
         resultMessage: req.params.lectureIdx + " lecture updated successfully",
       });
   });
+};
+
+exports.selectList = async (req, res) => {
+  try {
+    const lectureList = await Lecture.selectList(req);
+    if (!lectureList.length) {
+      res.status(404).json({ message: "No lecture" });
+    }
+    res.json(lectureList[0]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.create = async (req, res) => {
+  const lecture = new Lecture({
+    categoryIdx: req.body.categoryIdx,
+    teacherIdx: req.body.teacherIdx,
+    lectureTitle: req.body.lectureTitle,
+    lectureDesc: req.body.lectureDesc,
+    lecturePrice: req.body.lecturePrice,
+    isShowYN: req.body.isShowYN,
+  });
+
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content cannot be empty",
+    });
+    return;
+  }
+
+  try {
+    // Save lecture in database
+    const createResult = await Lecture.create(lecture);
+
+    if (!createResult.length) {
+      res.status(400).json({ message: "Already Exist" });
+      return;
+    }
+    console.log(JSON.stringify(createResult));
+    res.json(createResult[0]);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
 };
