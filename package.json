@@ -4,7 +4,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.15"
   },
   "name": "inflern",
@@ -15,5 +15,9 @@
   },
   "author": "",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
+  }
 }
