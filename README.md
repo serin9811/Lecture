@@ -1,6 +1,6 @@
-# Lecture
+# Lecture API
 
-Lecture is a REST API written in Node.js.
+Lecture API is a REST API written in Node.js.
 This API has predictable resouce-oriented URLs, accepts form-encoded request bodies, return JSON-encoded responses, and uses standard HTTP response, and verbs.
 
 ## How To Run
@@ -96,13 +96,13 @@ Response:
   "data": [
     {
       "lectureIdx": 1,
-      "CategoryIdx": 1,
+      "categoryIdx": 1,
       "lectureTitle": "Web 기초 1",
       "teacherIdx": 1,
       "lecturePrice": 50000,
       "isShowYN": "Y",
       "studentCount": 2,
-      "registDate": "2021-12-26 19:06:17"
+      "registDate": "2021-12-26T10:06:17.000Z"
     },
     {
       "lectureIdx": 1,
@@ -112,7 +112,7 @@ Response:
       "lecturePrice": 55000,
       "isShowYN": "Y",
       "studentCount": 11,
-      "registDate": "2021-12-26 19:06:17"
+      "registDate": "2021-12-26T10:06:17.000Z"
     }
   ]
 }
@@ -135,18 +135,18 @@ Response:
   "lecturePrice": 50000,
   "isShowYN": "Y",
   "studentCount": 2,
-  "registDate": "2021-12-26 19:06:17",
+  "registDate": "2021-12-26T10:06:17.000Z",
   "modifyDate": null,
   "students": [
     {
       "studentIdx": 1,
       "studentUserName": "열심맨",
-      "lectureStartDate": "2021-12-30 19:06:17"
+      "lectureStartDate": "2021-12-26T10:06:17.000Z"
     },
     {
       "studentIdx": 2,
       "studentUserName": "차도녀",
-      "lectureStartDate": "2021-12-31 19:06:17"
+      "lectureStartDate": "2021-12-26T10:06:17.000Z"
     }
   ]
 }
@@ -170,8 +170,8 @@ Response:
   "categoryIdx": 1,
   "lecturePrice": 50000,
   "isShowYN": "Y",
-  "registDate": "2021-12-26 19:06:17",
-  "modifyDate": "2021-12-30 19:06:17"
+  "registDate": "2021-12-26T10:06:17.000Z",
+  "modifyDate": "2021-12-26T10:06:17.000Z"
 }
 ```
 
@@ -191,8 +191,8 @@ Response:
   "categoryIdx": 1,
   "lecturePrice": 50000,
   "isShowYN": "Y",
-  "registDate": "2021-12-26 19:06:17",
-  "modifyDate": "2021-12-30 19:06:17"
+  "registDate": "2021-12-26T10:06:17.000Z",
+  "modifyDate": "2021-12-26T10:06:17.000Z"
 }
 ```
 
