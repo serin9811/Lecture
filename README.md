@@ -47,14 +47,15 @@ ex: `http://localhost:3000/api/v1/`
 
 ### Lecture API
 
-| Method | Path                  | Description                       |
-| ------ | --------------------- | --------------------------------- |
-| GET    | /lectures             | Read a list of lectures           |
-| GET    | /lectures/:lectureIdx | Read a detail of specific lecture |
-| POST   | /lectures             | Create new lecture                |
-| PUT    | /lectures/:lectureIdx | Update a specific lecture         |
-| PATCH  | /lectures/:lectureIdx | Update a specific lecture         |
-| DELETE | /lectures/:lectureIdx | Delete a lecture                  |
+| Method | Path                    | Description                       |
+| ------ | ----------------------- | --------------------------------- |
+| GET    | /lectures               | Read a list of lectures           |
+| GET    | /lectures?s=:searchWord | Read a list of search result      |
+| GET    | /lectures/:lectureIdx   | Read a detail of specific lecture |
+| POST   | /lectures               | Create new lecture                |
+| PUT    | /lectures/:lectureIdx   | Update a specific lecture         |
+| PATCH  | /lectures/:lectureIdx   | Update a specific lecture         |
+| DELETE | /lectures/:lectureIdx   | Delete a lecture                  |
 
 ### Student API
 
@@ -77,6 +78,130 @@ nodemon dev app.js
 localhost:3000/api-docs
 ```
 
+## Lecture
+
+**Read a list of lectures:** `GET /lectures`
+
+Pagination:
+
+- ex (Initial request): `GET /lectures?limit=10`
+- ex (Next page request): `GET/lecture?limit=10&starting_after=1`
+
+Response:
+
+```json
+{
+  "url": "/v1/lectures",
+  "has_more": true,
+  "data": [
+    {
+      "lectureIdx": 1,
+      "CategoryIdx": 1,
+      "lectureTitle": "Web 기초 1",
+      "teacherIdx": 1,
+      "lecturePrice": 50000,
+      "isShowYN": "Y",
+      "studentCount": 2,
+      "registDate": "2021-12-26 19:06:17"
+    },
+    {
+      "lectureIdx": 1,
+      "categoryIdx": 1,
+      "lectureTitle": "Web 기초 2",
+      "teacherIdx": 1,
+      "lecturePrice": 55000,
+      "isShowYN": "Y",
+      "studentCount": 11,
+      "registDate": "2021-12-26 19:06:17"
+    }
+  ]
+}
+```
+
+**Read a detail of lecture:** `GET /lectures/:lectureIdx`
+
+Pagination:
+
+- ex (Initial request): `GET /lectures?limit=10`
+- ex (Next page request): `GET/lecture?limit=10&starting_after=1`
+
+Response:
+
+```json
+{
+  "lectureTitle": "Web 기초 1",
+  "lectureDesc": "Web을 처음 접하는 수강생을 위한 강의!\n쉽고 재밌고 Web에 대해 알아보자!",
+  "categoryIdx": 1,
+  "lecturePrice": 50000,
+  "isShowYN": "Y",
+  "studentCount": 2,
+  "registDate": "2021-12-26 19:06:17",
+  "modifyDate": null,
+  "students": [
+    {
+      "studentIdx": 1,
+      "studentUserName": "열심맨",
+      "lectureStartDate": "2021-12-30 19:06:17"
+    },
+    {
+      "studentIdx": 2,
+      "studentUserName": "차도녀",
+      "lectureStartDate": "2021-12-31 19:06:17"
+    }
+  ]
+}
+```
+
+**Update specific lecture:** `PUT /lectures/:lectureIdx`
+
+Parameters (`application/json`):
+
+- lectureTitle: String (optional)
+- lectureDesc: String (optional)
+- lecturePrice: int (optional)
+
+Response:
+
+```json
+{
+  "lectureIdx": 2,
+  "lectureTitle": "Web 기초 1",
+  "lectureDesc": "Web을 처음 접하는 수강생을 위한 강의!\n쉽고 재밌고 Web에 대해 알아보자!",
+  "categoryIdx": 1,
+  "lecturePrice": 50000,
+  "isShowYN": "Y",
+  "registDate": "2021-12-26 19:06:17",
+  "modifyDate": "2021-12-30 19:06:17"
+}
+```
+
+**Update visibility of specific lecture:** `PATCH /lectures/:lectureIdx`
+
+Parameters (`application/json`):
+
+- isShowYN: String(required)
+
+Response:
+
+```json
+{
+  "lectureIdx": 2,
+  "lectureTitle": "Web 기초 1",
+  "lectureDesc": "Web을 처음 접하는 수강생을 위한 강의!\n쉽고 재밌고 Web에 대해 알아보자!",
+  "categoryIdx": 1,
+  "lecturePrice": 50000,
+  "isShowYN": "Y",
+  "registDate": "2021-12-26 19:06:17",
+  "modifyDate": "2021-12-30 19:06:17"
+}
+```
+
+**Delete specific lecture:** `DELETE /lectures/:lectureIdx`
+
 ## ERD
 
 ![image](https://user-images.githubusercontent.com/45909171/147907734-b527f2e4-5f26-4304-8585-5ee27769f87a.png)
+
+```
+
+```
