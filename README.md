@@ -62,7 +62,7 @@ ex: `http://localhost:3000/api/v1/`
 | ------ | --------------------- | -------------------------------------- |
 | GET    | /students             | Read a list of students                |
 | GET    | /students/:studentIdx | Read a detail of specific student info |
-| POST   | /students/            | Create new student                     |
+| POST   | /students             | Create new student                     |
 | PUT    | /students/:studentIdx | Update a specific student              |
 | PATCH  | /students/:studentIdx | Update a specific student              |
 | DELETE | /students/:studentIdx | Delete a student                       |
