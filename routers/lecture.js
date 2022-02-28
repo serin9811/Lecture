@@ -4,15 +4,18 @@ const lectures = require("../controllers/lecture.controller.js");
 const router = express.Router();
 
 //Read a list of lectures
-router.get("/list", lectures.selectList);
+router.get("", lectures.selectList);
 
 //Read a detail of lecture
 router.get("/:lectureIdx", lectures.selectOne);
 
 //Create a lecture
-router.post("/new", lectures.create);
+router.post("", lectures.create);
 
-//Update a lecture
+//Update specific lecture
 router.put("/:lectureIdx", lectures.update);
+
+//Update the visibility of specific lecture
+router.patch("/:lectureIdx", lectures.patch);
 
 module.exports = router;
