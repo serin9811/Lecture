@@ -25,7 +25,7 @@ http://localhost:3000/api/
 
 `v1/`
 
-ex: `http://localhost:8000/api/v1/`
+ex: `http://localhost:3000/api/v1/`
 
 ## Error
 
@@ -47,25 +47,25 @@ ex: `http://localhost:8000/api/v1/`
 
 ### Lecture API
 
-| Method | Path                         | Description                       |
-| ------ | ---------------------------- | --------------------------------- |
-| GET    | /lectures?page=1&pageSize=10 | Read a list of lectures           |
-| GET    | /lectures/:lectureIdx        | Read a detail of specific lecture |
-| POST   | /lectures                    | Create new lecture                |
-| PUT    | /lectures/:lectureIdx        | Update a specific lecture         |
-| PATCH  | /lectures/:lectureIdx        | Update a specific lecture         |
-| DELETE | /lectures/:lectureIdx        | Delete a lecture                  |
+| Method | Path                  | Description                       |
+| ------ | --------------------- | --------------------------------- |
+| GET    | /lectures             | Read a list of lectures           |
+| GET    | /lectures/:lectureIdx | Read a detail of specific lecture |
+| POST   | /lectures             | Create new lecture                |
+| PUT    | /lectures/:lectureIdx | Update a specific lecture         |
+| PATCH  | /lectures/:lectureIdx | Update a specific lecture         |
+| DELETE | /lectures/:lectureIdx | Delete a lecture                  |
 
 ### Student API
 
-| Method | Path                         | Description                            |
-| ------ | ---------------------------- | -------------------------------------- |
-| GET    | /students?page=1&pageSize=10 | Read a list of students                |
-| GET    | /students/:studentIdx        | Read a detail of specific student info |
-| POST   | /students/                   | Create new student                     |
-| PUT    | /students/:studentIdx        | Update a specific student              |
-| PATCH  | /students/:studentIdx        | Update a specific student              |
-| DELETE | /students/:studentIdx        | Delete a student                       |
+| Method | Path                  | Description                            |
+| ------ | --------------------- | -------------------------------------- |
+| GET    | /students             | Read a list of students                |
+| GET    | /students/:studentIdx | Read a detail of specific student info |
+| POST   | /students/            | Create new student                     |
+| PUT    | /students/:studentIdx | Update a specific student              |
+| PATCH  | /students/:studentIdx | Update a specific student              |
+| DELETE | /students/:studentIdx | Delete a student                       |
 
 ## API Docs
 
