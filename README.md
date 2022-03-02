@@ -25,7 +25,7 @@ http://localhost:3000/api/
 
 `v1/`
 
-ex: `http://localhost:3000/api/v1/`
+ex: `http://localhost:3000/v1/`
 
 ## Error
 
@@ -47,15 +47,14 @@ ex: `http://localhost:3000/api/v1/`
 
 ### Lecture API
 
-| Method | Path                    | Description                       |
-| ------ | ----------------------- | --------------------------------- |
-| GET    | /lectures               | Read a list of lectures           |
-| GET    | /lectures?s=:searchWord | Read a list of search result      |
-| GET    | /lectures/:lectureIdx   | Read a detail of specific lecture |
-| POST   | /lectures               | Create new lecture                |
-| PUT    | /lectures/:lectureIdx   | Update a specific lecture         |
-| PATCH  | /lectures/:lectureIdx   | Update a specific lecture         |
-| DELETE | /lectures/:lectureIdx   | Delete a lecture                  |
+| Method | Path                  | Description                       |
+| ------ | --------------------- | --------------------------------- |
+| GET    | /lectures             | Read a list of lectures           |
+| GET    | /lectures/:lectureIdx | Read a detail of specific lecture |
+| POST   | /lectures             | Create new lecture                |
+| PUT    | /lectures/:lectureIdx | Update a specific lecture         |
+| PATCH  | /lectures/:lectureIdx | Update a specific lecture         |
+| DELETE | /lectures/:lectureIdx | Delete a lecture                  |
 
 ### Student API
 
@@ -64,36 +63,34 @@ ex: `http://localhost:3000/api/v1/`
 | GET    | /students             | Read a list of students                |
 | GET    | /students/:studentIdx | Read a detail of specific student info |
 | POST   | /students             | Create new student                     |
-| PUT    | /students/:studentIdx | Update a specific student              |
-| PATCH  | /students/:studentIdx | Update a specific student              |
 | DELETE | /students/:studentIdx | Delete a student                       |
 
-## API Docs
+## API Docs with Swagger
 
 ```
 nodemon dev app.js
 ```
 
 ```
-localhost:3000/api-docs
+http://localhost:3000/api-docs
 ```
 
 ## Lecture
 
-**Read a list of lectures:** `GET /lectures`
+**Read a list of opened lectures:** `GET /lectures`
 
 Pagination:
 
 - ex (Initial request): `GET /lectures?limit=10`
-- ex (Next page request): `GET/lecture?limit=10&starting_after=1`
+- ex (Next page request): `GET/lectures?limit=10&starting_after=1`
 
 Response:
 
 ```json
 {
   "url": "/v1/lectures",
-  "has_more": true,
-  "data": [
+  "has_more": true, // Whether or not there are more elements available after this set.
+  "lectures": [
     {
       "lectureIdx": 1,
       "categoryIdx": 1,
@@ -120,11 +117,6 @@ Response:
 
 **Read a detail of lecture:** `GET /lectures/:lectureIdx`
 
-Pagination:
-
-- ex (Initial request): `GET /lectures?limit=10`
-- ex (Next page request): `GET/lecture?limit=10&starting_after=1`
-
 Response:
 
 ```json
@@ -133,7 +125,7 @@ Response:
   "lectureDesc": "Web을 처음 접하는 수강생을 위한 강의!\n쉽고 재밌고 Web에 대해 알아보자!",
   "categoryIdx": 1,
   "lecturePrice": 50000,
-  "isShowYN": "Y",
+  "isShowYN": "N",
   "studentCount": 2,
   "registDate": "2021-12-26T10:06:17.000Z",
   "modifyDate": null,
@@ -149,6 +141,31 @@ Response:
       "lectureStartDate": "2021-12-26T10:06:17.000Z"
     }
   ]
+}
+```
+
+**Create new lecture:** `POST /lectures`
+
+Request body (Required) (`application/json`):
+
+```json
+{
+  "categoryIdx" : 1,
+  "teacherIdx": 1,
+  "lectureTitle" : "Web 고급 1",
+  "lectureDesc" : "코딩의 ㅋ자도 모르는 왕초보를 위한 입문 수업입니다.웹의 기본부터 AWS 배포까지, 서비스 런칭을 위한 필수 기술을 모두 담았습니다. 튜터와의 즉문즉답 개발자 튜터의 꼼꼼한 코드리뷰로 걸림돌은 모조리 제거해 드릴게요. 매주 토/일 즉문즉답 시간, 3분 이내에 답변해드려요.
+  주 1회 온라인 스터디
+  스파르타 전용 메타버스, ‘코딩스파랜드’에서
+  평일 저녁/주말 낮마다 온라인 스터디가 진행됩니다. 매주 코딩하는 습관을 길러드려요",
+  "lecturePrice" : 100000
+}
+```
+
+Response:
+
+```json
+{
+  "lectureIdx": 3
 }
 ```
 
@@ -197,6 +214,106 @@ Response:
 ```
 
 **Delete specific lecture:** `DELETE /lectures/:lectureIdx`
+
+## Student
+
+**Read a list of students:** `GET /students`
+
+Pagination:
+
+- ex (Initial request): `GET /students?limit=10`
+- ex (Next page request): `GET/students?limit=10&starting_after=1`
+
+Response:
+
+```json
+{
+  "url": "/v1/students",
+  "has_more": true, // Whether or not there are more elements available after this set.
+  "students": [
+    {
+      "studentIdx": 1,
+      "studentEmail": "mimi@lecture.com",
+      "studentName": "김미미",
+      "studentUserName": "열심맨",
+      "registDate": "2021-12-26T10:06:17.000Z",
+      "modifyDate": "2021-12-29T10:06:17.000Z"
+    },
+    {
+      "studentIdx": 2,
+      "studentEmail": "cha@lecture.com",
+      "studentName": "강차차",
+      "studentUserName": "차도녀",
+      "registDate": "2021-12-26T10:06:17.000Z",
+      "modifyDate": null
+    }
+  ]
+}
+```
+
+**Read a specific student:** `GET /students/:studentIdx
+
+Response:
+
+```json
+{
+  "studentIdx": 1,
+  "studentEmail": "mimi@lecture.com",
+  "studentName": "김미미",
+  "studentUserName": "열심맨",
+  "registDate": "2021-12-26T10:06:17.000Z",
+  "modifyDate": "2021-12-29T10:06:17.000Z"
+}
+```
+
+**Create new student:** `POST /students`
+
+Request body (Required) (`application/json`):
+
+```json
+{
+  "studentEmail": "lalisa@lecture.com",
+  "studentName": "라리사",
+  "studentUserName": "블핑라리사아님"
+}
+```
+
+Response:
+
+```json
+{
+  "studentIdx": 3
+}
+```
+
+**Delete a student:** `DELETE /students/:studentIdx
+
+## Payment
+
+**Pay a lecture:** `POST /payments`
+
+Request body (Required) (`application/json`):
+
+```json
+{
+  "studentIdx": 1,
+  "lectures": [
+    {
+      "lectureIdx": 1,
+      "lectureIdx": 2
+    }
+  ]
+}
+```
+
+Response
+
+```json
+{
+  "studentIdx": 1,
+  "paymentIdx": "2022030222290001A" //yyyyMMddHHmm + sequence + alphabet
+}
+```
 
 ## ERD
 
