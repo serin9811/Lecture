@@ -313,7 +313,7 @@ Response
 ```json
 {
   "studentIdx": 1,
-  "paymentIdx": "2022030222290001A" //yyyyMMddHHmm + sequence + alphabet
+  "paymentIdx": "202203022229011" //yyyyMMddHHmmss + sequence
 }
 ```
 
