@@ -319,7 +319,7 @@ Response
 
 ## ERD
 
-[ERD_lecture.pdf](https://github.com/serin9811/Lecture/files/8196942/ERD_lecture.pdf)
+![image](https://user-images.githubusercontent.com/45909171/157015909-f4451d85-96c0-4de4-bc3e-c45aaae6fb6e.png)
 
 ```
 
