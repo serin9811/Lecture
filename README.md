@@ -253,7 +253,7 @@ Response:
 }
 ```
 
-**Read a specific student:** `GET /students/:studentIdx
+**Read a specific student:** `GET /students/:studentIdx`
 
 Response:
 
@@ -288,7 +288,7 @@ Response:
 }
 ```
 
-**Delete a student:** `DELETE /students/:studentIdx
+**Delete a student:** `DELETE /students/:studentIdx`
 
 ## Payment
 
