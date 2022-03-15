@@ -15,7 +15,7 @@ const router = express.Router();
 
 /**
  * @swagger
- *   /new:
+ *      /students:
  *     post:
  *       tags:
  *        - Students
@@ -33,7 +33,7 @@ const router = express.Router();
  *           $ref: '#/definitions/Student'
  *
  */
-router.post("/new", students.create);
+router.post("", students.create);
 
 router.delete("/:studentIdx", students.delete);
 
