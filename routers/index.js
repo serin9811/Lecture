@@ -8,7 +8,7 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Lecutres
+ *   name: Lectures
  *   description: Lecture Management
  */
 router.use("/lectures", lectureRouter);
