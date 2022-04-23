@@ -5,7 +5,8 @@
     "express": "^4.17.2",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "yarn": "^1.22.18"
   },
   "name": "inflern",
   "version": "1.0.0",
